@@ -1,0 +1,19 @@
+<benchmark>
+  <entries>
+    <entry category="Monument" eid="Id1" shape="(X (X) (X) (X))" shape_type="sibling" size="3">
+      <originaltripleset>
+        <otriple>11th_Mississippi_Infantry_Monument | country | "United States"@en</otriple>
+        <otriple>11th_Mississippi_Infantry_Monument | established | 2000</otriple>
+        <otriple>11th_Mississippi_Infantry_Monument | category | Contributing_property</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>11th_Mississippi_Infantry_Monument | country | "United States"</mtriple>
+        <mtriple>11th_Mississippi_Infantry_Monument | established | 2000</mtriple>
+        <mtriple>11th_Mississippi_Infantry_Monument | category | Contributing_property</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">The 11th Mississippi Infantry Monument, USA, is categorised as a contributing property and was established in 2000.</lex>
+      <lex comment="good" lid="Id2">The 11th Mississippi Infantry monument was established in the US in 2000 and falls under the category of Contributing property.</lex>
+      <lex comment="good" lid="Id3">The 11th Mississippi Infantry Monument in the United States was established in the year 2000, and is categorized as a Contributing Property.</lex>
+    </entry>
+    </entries>
+</benchmark>

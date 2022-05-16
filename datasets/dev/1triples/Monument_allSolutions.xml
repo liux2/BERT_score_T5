@@ -1,0 +1,20 @@
+<benchmark>
+  <entries>
+    <entry category="Monument" eid="Id1" shape="(X (X))" shape_type="NA" size="1">
+      <originaltripleset>
+        <otriple>Atatürk_Monument_(İzmir) | designer | Pietro_Canonica</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Atatürk_Monument_(İzmir) | designer | Pietro_Canonica</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">The Atatürk Monument in Izmir was designed by Pietro Canonica.</lex>
+      <lex comment="good" lid="Id2">Pietro Canonica designed the Atatürk Monument in Izmir.</lex>
+      <lex comment="good" lid="Id3">Pietro Canonica is the designer of the Ataturk Monument (Izmir).</lex>
+      <lex comment="good" lid="Id4">The Ataturk Monument was designed by Pietro Canonica.</lex>
+      <lex comment="good" lid="Id5">Ataturk Monument was designed by Pietro Canonica.</lex>
+      <lex comment="good" lid="Id6">The Atatürk Monument (İzmir) was designed by Pietro Canonica.</lex>
+      <lex comment="good" lid="Id7">The designer of the Atatürk Monument (İzmir) is Pietro Canonica.</lex>
+      <lex comment="good" lid="Id8">Pietro Canonica is the designer of the Ataturk Monument in Izmir.</lex>
+    </entry>
+    </entries>
+</benchmark>

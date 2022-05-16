@@ -1,0 +1,17 @@
+<benchmark>
+  <entries>
+    <entry category="MusicalWork" eid="Id1" shape="(X (X) (X) (X))" shape_type="sibling" size="3">
+      <originaltripleset>
+        <otriple>Turn_Me_On_(album) | runtime | 35.1</otriple>
+        <otriple>Turn_Me_On_(album) | producer | Wharton_Tiers</otriple>
+        <otriple>Turn_Me_On_(album) | subsequentWork | Take_It_Off!</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Turn_Me_On_(album) | runtime | 35.1</mtriple>
+        <mtriple>Turn_Me_On_(album) | producer | Wharton_Tiers</mtriple>
+        <mtriple>Turn_Me_On_(album) | followedBy | Take_It_Off!</mtriple>
+      </modifiedtripleset>
+      <lex lang="en" lid="1">Turn Me On is a 35.1 minute long album produced by Wharton Tiers that was followed by the album entitled Take it Off.</lex>
+    </entry>
+    </entries>
+</benchmark>

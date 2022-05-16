@@ -1,0 +1,21 @@
+<benchmark>
+  <entries>
+    <entry category="Monument" eid="Id1" shape="(X (X) (X (X) (X)))" shape_type="mixed" size="4">
+      <originaltripleset>
+        <otriple>Adams_County,_Pennsylvania | southeast | Carroll_County,_Maryland</otriple>
+        <otriple>Adams_County,_Pennsylvania | north | Cumberland_County,_Pennsylvania</otriple>
+        <otriple>11th_Mississippi_Infantry_Monument | municipality | Gettysburg,_Pennsylvania</otriple>
+        <otriple>11th_Mississippi_Infantry_Monument | region | Adams_County,_Pennsylvania</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Adams_County,_Pennsylvania | hasToItsSoutheast | Carroll_County,_Maryland</mtriple>
+        <mtriple>Adams_County,_Pennsylvania | hasToItsNorth | Cumberland_County,_Pennsylvania</mtriple>
+        <mtriple>11th_Mississippi_Infantry_Monument | municipality | Gettysburg,_Pennsylvania</mtriple>
+        <mtriple>11th_Mississippi_Infantry_Monument | location | Adams_County,_Pennsylvania</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Adams County, Pennsylvania has Carroll County, Maryland to its southeast and Pennsylvania's Cumberland County is to the north of the Adams County. The 11th Mississippi Infantry Monument is in Adams County of the municipality of Gettysburg Pennsylvania.</lex>
+      <lex comment="good" lid="Id2">The 11th Mississippi Infantry Monument is located at Gettysburg, Adams County, Pennsylvania, which has Cumberland County, Pennsylvania to its north and Carroll County, Maryland to its southeast.</lex>
+      <lex comment="good" lid="Id3">The municipality of Gettysburg, Adams County, Pennsylvania is the location of the 11th Mississippi Infantry monument. Adams County is south of Cumberland County and to the northwest of Carroll County, Maryland.</lex>
+    </entry>
+    </entries>
+</benchmark>
