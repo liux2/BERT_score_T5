@@ -27,17 +27,16 @@ The running environment are encapsulated in the docker image. Follow the steps b
 1. Prepare the repository with the structure in
   [Repo Structure](#repo-structure) section.
 2. Build the docker image by running `sudo ./scripts/build_docker.sh` in the
-  `matterhorn/` directory.
+  `BERT_score_T5/` directory.
 3. Run the docker image by using
-  `sudo ./scripts/run_docker.sh /absolute/path/of/BERT_score_T5`. Here
-  `/absolute/path/of/BERT_score_T5` is the path of `BERT_score_T5/` starting from
-  the root directory of the machine, for example,
-  `/home/ml/Documents/BERT_score_T5`.
+  `sudo ./scripts/run_docker.sh`.
 
 The above steps will create a docker image and run the docker image with
 `BERT_score_T5/` repository mounted to the docker volume. To learn how to
 customize the Docker image, checkout:
-https://docs.nvidia.com/ngc/ngc-catalog-user-guide/index.html#custcontdockerfile
+
+- [How to customize docker](https://docs.nvidia.com/ngc/ngc-catalog-user-guide/index.html#custcontdockerfile)
+- [How to use Nvidia PyTorch NGC Docker images](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
 
 ## License
 
