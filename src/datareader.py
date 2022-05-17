@@ -35,7 +35,7 @@ class DataLoader:
 def main():
     dset = DataLoader("./datasets/train")
     dset.printStats()
-    dset.printEntryInfo(6)
+    dset.printEntryInfo(200)
 
 
 if __name__ == "__main__":
