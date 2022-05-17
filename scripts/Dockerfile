@@ -8,3 +8,4 @@ FROM nvcr.io/nvidia/pytorch:22.03-py3
 #rm -rf /var/lib/apt/lists/
 RUN pip install git+https://github.com/huggingface/transformers
 RUN pip install datasets
+RUN pip install sentencepiece
