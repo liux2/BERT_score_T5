@@ -5,9 +5,6 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![made-with-pytorch](https://img.shields.io/badge/Made%20with-PyTorch-orange)](https://pytorch.org/)
 
-## Table of Contents
-
-
 ## What's This Project About?
 
 ### Brief Intro
@@ -45,9 +42,16 @@ relations between them) and the corresponding facts in the form of natural langu
 text. The corpus contains sets with up to 7 triplets each along with one or more
 reference texts for each set.
 
-
 ## Dependencies
 
+### Data Reader
+
+To read the XML files, WebNLG provides [corpus-reader](https://gitlab.com/webnlg/corpus-reader) to read
+the triples and sentences.
+
+### Other Dependences
+
+All the other dependencies were installed in the docker image directly.
 
 ## How to Run?
 
