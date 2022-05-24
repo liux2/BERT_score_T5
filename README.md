@@ -58,11 +58,11 @@ All the other dependencies were installed in the docker image directly.
 The running environment are encapsulated in the docker image. Follow the steps below:
 
 1. Prepare the repository with the structure in
-  [Repo Structure](#repo-structure) section.
+   [Repo Structure](#repo-structure) section.
 2. Build the docker image by running `sudo ./scripts/build_docker.sh` in the
-  `BERT_score_T5/` directory.
+   `BERT_score_T5/` directory.
 3. Run the docker image by using
-  `sudo ./scripts/run_docker.sh`.
+   `sudo ./scripts/run_docker.sh`.
 
 The above steps will create a docker image and run the docker image with
 `BERT_score_T5/` repository mounted to the docker volume. To learn how to

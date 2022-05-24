@@ -3,6 +3,7 @@ import pandas as pd
 import torch
 from tqdm import tqdm
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Adafactor
+from bert_score import score
 import argparse
 
 # read the argument
@@ -11,6 +12,8 @@ parser.add_argument('--batch_size', '-b', type=int, default=8,
                         help='Number of sentence in each mini-batch')
 parser.add_argument('--epoch', '-e', type=int, default=4,
                         help='Number of sweeps over the dataset to train')
+parser.add_argument('--type', '-t', type=int, default='f1',
+                        help='type of BERTScore to calculate loss (p, r, f1)')
 args = parser.parse_args()
 
 
@@ -27,13 +30,13 @@ train_df = train_df.iloc[:(rows//batch_size*batch_size), :]   # truncated the re
 train_df = train_df.sample(frac=1)   # shuffle the dataset
 num_of_batches = int(len(train_df)/batch_size)
 
-# Use gpu
+# detect the device
 if torch.cuda.is_available():
-    dev = torch.device("cuda:0")
-    print("Running on the GPU")
+   dev = torch.device("cuda:0")
+   print("Running on the GPU")
 else:
-    dev = torch.device("cpu")
-    print("Running on the CPU")
+   dev = torch.device("cpu")
+   print("Running on the CPU")
 
 # set up the model and tokenizer
 tokenizer = T5Tokenizer.from_pretrained('t5-base')
@@ -52,30 +55,44 @@ optimizer = Adafactor(model.parameters(),lr=1e-3,
                       warmup_init=False)
 
 
-# start training
-model.train()
+# define my own loss function using BERTScore
+def my_BERTScore_loss(logits, labels, type="f1"):
+    logits = torch.argmax(logits, dim=2)
+
+    row, col = logits.shape
+    cands, refs = [], []
+    for i in range(row):
+        cands.append(tokenizer.decode(logits[i]))
+        refs.append(tokenizer.decode(labels[i]))
+
+    p, r, f1 = score(cands, refs, lang="en", verbose=False)
+    loss = p if type == 'p' else r if type == 'r' else f1
+    loss.requires_grad_(True)
+    return -loss.mean()     # set it negative so we can minimize it
+
+
+# start the training
 num_of_epochs = args.epoch
+model.train()
 loss_per_10_steps = []
-for epoch in range(1, num_of_epochs + 1):
-    print("Running epoch: {}".format(epoch))
+for epoch in tqdm(range(1, num_of_epochs + 1)):
+    print('Running epoch: {}'.format(epoch))
 
     running_loss = 0
 
-    for i in range(num_of_batches):
+    for i in tqdm(range(num_of_batches)):
         inputbatch = []
         labelbatch = []
-        new_df = train_df[i * batch_size : i * batch_size + batch_size]
+        new_df = train_df[i * batch_size: i * batch_size + batch_size]
         for indx, row in new_df.iterrows():
-            input = "WebNLG: " + row["input_text"] + "</s>"
-            labels = row["target_text"] + "</s>"
+            input = 'WebNLG: ' + row['triple'] + '</s>'
+            labels = row['sentence'] + '</s>'
             inputbatch.append(input)
             labelbatch.append(labels)
-        inputbatch = tokenizer.batch_encode_plus(
-            inputbatch, padding=True, max_length=400, return_tensors="pt"
-        )["input_ids"]
-        labelbatch = tokenizer.batch_encode_plus(
-            labelbatch, padding=True, max_length=400, return_tensors="pt"
-        )["input_ids"]
+        inputbatch = tokenizer.batch_encode_plus(inputbatch, padding=True, max_length=400, return_tensors='pt')[
+            "input_ids"]
+        labelbatch = tokenizer.batch_encode_plus(labelbatch, padding=True, max_length=400, return_tensors="pt")[
+            "input_ids"]
         inputbatch = inputbatch.to(dev)
         labelbatch = labelbatch.to(dev)
 
@@ -84,9 +101,10 @@ for epoch in range(1, num_of_epochs + 1):
 
         # Forward propogation
         outputs = model(input_ids=inputbatch, labels=labelbatch)
-        loss = outputs.loss
-        loss_num = loss.item()
         logits = outputs.logits
+        loss = my_BERTScore_loss(logits, labelbatch, args.type)
+        loss_num = loss
+
         running_loss += loss_num
         if i % 10 == 0:
             loss_per_10_steps.append(loss_num)
@@ -98,7 +116,7 @@ for epoch in range(1, num_of_epochs + 1):
         optimizer.step()
 
     running_loss = running_loss / int(num_of_batches)
-    print("Epoch: {} , Running loss: {}".format(epoch, running_loss))
+    print('Epoch: {} , Running loss: {}'.format(epoch, running_loss))
 
-torch.save(model.state_dict(), 'baseline_T5.bin')
-print("finished training and saved the regular model!")
+torch.save(model.state_dict(), 'BERTScore_T5.bin')
+print("finished training and saved the BERTScore model!")
