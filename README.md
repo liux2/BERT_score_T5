@@ -71,6 +71,15 @@ customize the Docker image, checkout:
 - [How to customize docker](https://docs.nvidia.com/ngc/ngc-catalog-user-guide/index.html#custcontdockerfile)
 - [How to use Nvidia PyTorch NGC Docker images](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch)
 
+### How to Use Jupyter Notebook with Docker
+
+1. Run `bash scripts/start_jupyter.sh` after logged in docker image.
+2. Follow the instructions in terminal and copy paste the link in browser.
+    - If you are using local machine, replace `hostname` with `localhost`.
+    - If you are using remote machine, use
+    `ssh -N -f -L localhost:<remote_port>:localhost:<local_port> <remote_user_name>@<remote_ip>`,
+    and don't forget to replace the information in `<>`.
+
 ### Why do we use docker?
 
 It saves time. You don't have to worry about installing drivers and dependencies

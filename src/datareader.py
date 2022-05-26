@@ -49,12 +49,13 @@ class DataGenerator:
 def main():
     # Train set
     train_set = DataGenerator("./datasets/train")
-    # train_set.printStats()
-    # train_set.printEntryInfo(13210)
     train_set.creating_split("./datasets/train_set.csv")
-    # Dev set
+    # # Dev set
     dev_set = DataGenerator("./datasets/dev")
     dev_set.creating_split("./datasets/dev_set.csv")
+    # test set
+    test_set = DataGenerator("./datasets/test")
+    test_set.creating_split("./datasets/test_set.csv")
 
 
 if __name__ == "__main__":

@@ -6,7 +6,11 @@ FROM nvcr.io/nvidia/pytorch:22.03-py3
 #	my-extra-package-2 \
 #	&& \
 #rm -rf /var/lib/apt/lists/
+RUN pip install black
+RUN pip install jupyter-black
 RUN pip install git+https://github.com/huggingface/transformers
 RUN pip install datasets
 RUN pip install sentencepiece
 RUN pip install bert-score
+RUN pip install wandb
+RUN pip install sacrebleu sacrebleu

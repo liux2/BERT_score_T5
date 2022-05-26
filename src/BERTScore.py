@@ -12,7 +12,7 @@ parser.add_argument('--batch_size', '-b', type=int, default=8,
                         help='Number of sentence in each mini-batch')
 parser.add_argument('--epoch', '-e', type=int, default=4,
                         help='Number of sweeps over the dataset to train')
-parser.add_argument('--type', '-t', type=int, default='f1',
+parser.add_argument('--types', '-t', type=str, default='f1',
                         help='type of BERTScore to calculate loss (p, r, f1)')
 args = parser.parse_args()
 
@@ -56,7 +56,7 @@ optimizer = Adafactor(model.parameters(),lr=1e-3,
 
 
 # define my own loss function using BERTScore
-def my_BERTScore_loss(logits, labels, type="f1"):
+def my_BERTScore_loss(logits, labels, types="f1"):
     logits = torch.argmax(logits, dim=2)
 
     row, col = logits.shape
@@ -102,7 +102,7 @@ for epoch in tqdm(range(1, num_of_epochs + 1)):
         # Forward propogation
         outputs = model(input_ids=inputbatch, labels=labelbatch)
         logits = outputs.logits
-        loss = my_BERTScore_loss(logits, labelbatch, args.type)
+        loss = my_BERTScore_loss(logits, labelbatch, args.types)
         loss_num = loss
 
         running_loss += loss_num
